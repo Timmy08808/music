@@ -34,30 +34,22 @@
 </template>
 <script lang="ts" setup>
 import axios from 'axios'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import AudioCon from './components/AudioCon.vue'
-import { list } from './mp3/list'
 
 // https://www.bilibili.com/read/cv15587325/ // 免费网易云api
 const baseUrl = 'http://music.cyrilstudio.top'
 
+const list = ref<any[]>([])
 const typeI = ref(0)
 const searchText = ref('')
 const wangyiList = ref<any[]>([])
 const loading = ref(false)
 
-const mp3List = list.map(o => {
-    const url = new URL(`./mp3/${o.name}`, import.meta.url).href
-    return {
-        url,
-        name: o.name.replace('.mp3', ''),
-    }
-})
-
 const current = ref<any>()
 const searchList = computed(() => {
     if (typeI.value === 1) return []
-    return mp3List.map(o => {
+    return list.value.map(o => {
         if (searchText.value && o.name.indexOf(searchText.value) === -1) {
             return null
         } else {
@@ -66,6 +58,14 @@ const searchList = computed(() => {
     }).filter(j => j)
 })
 
+const getList = async () => {
+    const base = 'http://localhost:3376'
+    const url = base + '/api/mp3/list'
+    const { data } = await axios.get(url)
+    if (data.code === 200) {
+        list.value = data.data.map(o => ({ ...o, url: base + o.url }))
+    }
+}
 
 const handleTypeClick = i => {
     typeI.value = i
@@ -114,6 +114,10 @@ const handleEnd = () => {
     }
     current.value = list[i]
 }
+
+onMounted(() => {
+    getList()
+})
 </script>
 <style lang="scss" scoped>
 .app {
@@ -215,4 +219,4 @@ const handleEnd = () => {
         }
     }
 }
-</style>
+</style>./public/mp3/list
