@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/main.mjs",
-    "web": "vite"
+    "web": "vite",
+    "build": "vite build"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
