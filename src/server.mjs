@@ -13,13 +13,12 @@ const server = () => {
     const app = new Koa()
     const router = new Router()
     router.get('/', async ctx => {
-        ctx.body = 'koa +++'
+        ctx.body = 'hello word !'
     })
     router.get('/api/mp3/list', async ctx => {
         const dirPath = 'src/public/mp3'
         const dir = fs.readdirSync(resolve(dirPath))
         const data = dir.filter(k => /\.mp3/.test(k)).map(name => ({ name: name.replace(/\.mp3/, ''), url: `/mp3/${name}` }))
-        // fs.writeFileSync(resolve(dirPath) + '/list.ts', `export const list = ${JSON.stringify(dir)}`)
         ctx.body = {
             code: 200,
             data
@@ -31,9 +30,7 @@ const server = () => {
     use(koastatic(resolve('src/public'), {})).
     use(router.routes()).
     use(router.allowedMethods()).
-    
     listen(port, () => console.log("🚀 ~ server ~ run: http://localhost:" + port))
-
 }
 server()
 

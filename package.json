@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/main.mjs",
+    "dev": "nodemon src/server.mjs",
     "web": "vite",
     "build": "vite build"
   },
