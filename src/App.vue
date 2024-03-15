@@ -56,7 +56,7 @@ const searchList = computed(() => {
 })
 
 const getList = async () => {
-    const { res } = await GET('/api/mp3/list')
+    const { res } = await GET('/api/music/list')
     if (res) {
         list.value = res.map(o => ({ ...o, url: baseURL + o.url }))
     }

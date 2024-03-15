@@ -10,7 +10,7 @@ router.get('/', async ctx => {
     ctx.body = 'hello word !'
 })
 
-router.get('/api/mp3/list', async ctx => {
+router.get('/api/music/list', async ctx => {
     const names = readdirSync(resolve( 'public/music'))
     const data = names.filter(k => /\.mp3/.test(k)).map(name => ({ name: name.replace(/\.mp3/, ''), url: `/music/${name}` }))
     ctx.return({ data })
