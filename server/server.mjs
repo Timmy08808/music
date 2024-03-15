@@ -14,7 +14,7 @@ const server = () => {
     app.
     use(cors()).
     use(contextMiddleware()).
-    use(koastatic(resolve('src/server/public'))).
+    use(koastatic(resolve('server/public'))).
     use(router.routes()).
     use(router.allowedMethods()).
     listen(port, () => console.log("🚀 ~ server ~ run: http://localhost:" + port))
