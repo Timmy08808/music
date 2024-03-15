@@ -63,6 +63,7 @@ const getList = async () => {
 }
 
 const handleTypeClick = i => {
+    searchText.value = ''
     typeI.value = i
 }
 
