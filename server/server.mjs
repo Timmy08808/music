@@ -6,7 +6,7 @@ import cors from '@koa/cors'
 
 import router from './router/index.mjs'
 import { contextMiddleware } from './middleware/context.mjs'
-import { whiteList } from './config/index.mjs'
+import { whiteListMiddleware } from './middleware/whiteList.mjs'
 import { resolve } from './utils/index.mjs'
 
 const server = () => {
@@ -14,13 +14,9 @@ const server = () => {
     const app = new Koa()
 
     app.
-    use(cors({
-        origin: ctx => { // 白名单
-            const origin = ctx.header.origin
-            return whiteList.includes(origin) ? origin : false
-        }
-    })).
     use(contextMiddleware()).
+    use(whiteListMiddleware()).
+    use(cors()).
     use(koastatic(resolve('public'))).
     use(router.routes()).
     use(router.allowedMethods()).
