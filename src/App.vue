@@ -33,12 +33,9 @@
     </div>
 </template>
 <script lang="ts" setup>
-import axios from 'axios'
+import { GET, baseURL } from './api/request'
 import { computed, onMounted, ref } from 'vue'
 import AudioCon from './components/AudioCon.vue'
-
-// https://www.bilibili.com/read/cv15587325/ // 免费网易云api
-const baseUrl = 'http://music.cyrilstudio.top'
 
 const list = ref<any[]>([])
 const typeI = ref(0)
@@ -59,11 +56,9 @@ const searchList = computed(() => {
 })
 
 const getList = async () => {
-    const base = 'http://localhost:3376'
-    const url = base + '/api/mp3/list'
-    const { data } = await axios.get(url)
-    if (data.code === 200) {
-        list.value = data.data.map(o => ({ ...o, url: base + o.url }))
+    const { res } = await GET('/api/mp3/list')
+    if (res) {
+        list.value = res.map(o => ({ ...o, url: baseURL + o.url }))
     }
 }
 
@@ -72,9 +67,9 @@ const handleTypeClick = i => {
 }
 
 const handlePlay = async ({ id, name }) => {
-    const { data } = await axios.get(`${baseUrl}/song/url?id=${id}`)
-    if (data.code === 200) {
-        current.value = { name, url: data.data[0].url }
+    const { res } = await GET(`/api/song/url?id=${id}`)
+    if (res) {
+        current.value = { name, url: res[0].url }
     }
 }
 
@@ -88,11 +83,12 @@ const timeFn = num => {
 const handleSearch = async () => {
     const name = searchText.value
     loading.value = true
-    const { data } = await axios.get(`${baseUrl}/search?keywords=${name}`)
+    // const { data } = await axios.get(`${baseUrl}/search?keywords=${name}`)
+    const { data } = await axios.get(`${baseUrl}/api/threelist?keywords=${name}`)
     loading.value = false
     console.log("🚀 ~ handleSearch ~ data:", data)
     if (data.code === 200) {
-        wangyiList.value = data.result.songs.map(o => ({
+        wangyiList.value = data.data.songs.map(o => ({
             ...o,
             name: `${o.name}${o.fee === 1 ? '【试听】' : ''}`
         }))
