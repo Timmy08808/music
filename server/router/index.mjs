@@ -27,7 +27,7 @@ router.get('/api/threelist', async ctx => {
 router.get('/api/threedetail', async ctx => {
     const { id } = ctx.query
     const { data: { data } } = await axios.get(`${baseUrl}/song/url?id=${id}`)
-    ctx.return(data)
+    ctx.return({ data })
 })
 
 export default router
