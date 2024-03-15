@@ -6,6 +6,7 @@ import cors from '@koa/cors'
 
 import router from './router/index.mjs'
 import { contextMiddleware } from './middleware/context.mjs'
+import { whiteList } from './config/index.mjs'
 import { resolve } from './utils/index.mjs'
 
 const server = () => {
@@ -13,7 +14,12 @@ const server = () => {
     const app = new Koa()
 
     app.
-    use(cors()).
+    use(cors({
+        origin: ctx => { // 白名单
+            const origin = ctx.header.origin
+            return whiteList.includes(origin) ? origin : false
+        }
+    })).
     use(contextMiddleware()).
     use(koastatic(resolve('public'))).
     use(router.routes()).
@@ -21,7 +27,7 @@ const server = () => {
     listen(port, () => console.log("🚀 ~ server ~ run: http://localhost:" + port))
 }
 
-const startCluster = () => {
+const startCluster = () => { // 集群
     if (cluster.isPrimary) {
         const numCpus = availableParallelism()
         console.log("🚀 ~ startCluster ~ numCpus:", numCpus)
@@ -45,4 +51,5 @@ const startServer = () => {
         startCluster()
     }
 }
+
 startServer()
