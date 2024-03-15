@@ -67,7 +67,7 @@ const handleTypeClick = i => {
 }
 
 const handlePlay = async ({ id, name }) => {
-    const { res } = await GET(`/api/song/url?id=${id}`)
+    const { res } = await GET(`/api/threedetail?id=${id}`)
     if (res) {
         current.value = { name, url: res[0].url }
     }
@@ -83,12 +83,10 @@ const timeFn = num => {
 const handleSearch = async () => {
     const name = searchText.value
     loading.value = true
-    // const { data } = await axios.get(`${baseUrl}/search?keywords=${name}`)
-    const { data } = await axios.get(`${baseUrl}/api/threelist?keywords=${name}`)
+    const { res } = await GET(`/api/threelist?keywords=${name}`)
     loading.value = false
-    console.log("🚀 ~ handleSearch ~ data:", data)
-    if (data.code === 200) {
-        wangyiList.value = data.data.songs.map(o => ({
+    if (res) {
+        wangyiList.value = res.songs.map(o => ({
             ...o,
             name: `${o.name}${o.fee === 1 ? '【试听】' : ''}`
         }))

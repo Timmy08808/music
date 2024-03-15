@@ -4,6 +4,7 @@ import koastatic from 'koa-static'
 import cors from '@koa/cors'
 
 import router from './router/index.mjs'
+import { contextMiddleware } from './middleware/context.mjs'
 
 
 const server = () => {
@@ -12,7 +13,8 @@ const server = () => {
 
     app.
     use(cors()).
-    use(koastatic(resolve('src/server/public'), {})).
+    use(contextMiddleware()).
+    use(koastatic(resolve('src/server/public'))).
     use(router.routes()).
     use(router.allowedMethods()).
     listen(port, () => console.log("🚀 ~ server ~ run: http://localhost:" + port))
