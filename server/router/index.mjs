@@ -1,8 +1,8 @@
-import fs from 'node:fs'
-import { resolve } from 'node:path'
-
+import { readdirSync } from 'node:fs'
 import axios from 'axios'
 import Router from '@koa/router'
+
+import { resolve } from '../utils/index.mjs'
 
 const router = new Router()
 
@@ -11,7 +11,7 @@ router.get('/', async ctx => {
 })
 
 router.get('/api/mp3/list', async ctx => {
-    const names = fs.readdirSync(resolve( 'server/public/mp3'))
+    const names = readdirSync(resolve( 'public/mp3'))
     const data = names.filter(k => /\.mp3/.test(k)).map(name => ({ name: name.replace(/\.mp3/, ''), url: `/mp3/${name}` }))
     ctx.return({ data })
 })
