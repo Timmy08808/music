@@ -12,6 +12,7 @@
         <div class="typeb">
             <span v-for="(text, i) in ['好歌', 'Tiktok', '站外']" :class="{ act: i === typeI }" @click="handleTypeClick(i)" :key="i">{{ text }}</span>
         </div>
+        <div class="loading">{{ loading ? '加载中...' : '' }}</div>
         <div class="list" v-show="[0, 1].includes(typeI)">
             <div v-for="(item, i) in searchList" :key="i" class="listI" :class="{ isSelected: item.name === current?.name }">
                 <span class="name">{{ i + 1 }}、{{ item.name }}</span>
@@ -19,7 +20,6 @@
             </div>
         </div>
         <div v-show="typeI === 2" class="three">
-            <div>{{ loading ? '数据加载中...' : '' }}</div>
             <div>
                 <div v-for="(item, i) in wangyiList" :key="item.id ?? i" class="s-list">
                     <div class="s-list-msg">
@@ -58,7 +58,10 @@ const searchList = computed(() => {
 })
 
 const getList = async () => {
+    list.value = []
+    loading.value = true
     const { res } = await GET(`/api/music/list?type=${typeI.value}`)
+    loading.value = false
     if (res) {
         list.value = res.map(o => ({ ...o, url: baseURL + o.url }))
     }
@@ -67,7 +70,7 @@ const getList = async () => {
 const handleTypeClick = i => {
     searchText.value = ''
     typeI.value = i
-    getList()
+    i !== 2 && getList()
 }
 
 const handlePlay = async ({ id, name }) => {
@@ -164,6 +167,9 @@ onMounted(() => {
                 color: #fff;
             }
         }
+    }
+    .loading {
+        text-align: center;
     }
     .three {
         margin-top: 20px;
