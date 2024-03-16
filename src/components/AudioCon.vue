@@ -117,7 +117,7 @@ watch(props, () => {
     justify-content: space-between;
     align-items: center;
     padding: 8px 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.5s;
     box-shadow: 0 0 10px var(--theme-color);
     .name {
