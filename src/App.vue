@@ -10,15 +10,15 @@
             </div>
         </div>
         <div class="typeb">
-            <span v-for="(text, i) in ['站内', '站外']" :class="{ act: i === typeI }" @click="handleTypeClick(i)" :key="i">{{ text }}</span>
+            <span v-for="(text, i) in ['好歌', 'Tiktok', '站外']" :class="{ act: i === typeI }" @click="handleTypeClick(i)" :key="i">{{ text }}</span>
         </div>
-        <div class="list" v-show="typeI === 0">
+        <div class="list" v-show="[0, 1].includes(typeI)">
             <div v-for="(item, i) in searchList" :key="i" class="listI" :class="{ isSelected: item.name === current?.name }">
                 <span class="name">{{ i + 1 }}、{{ item.name }}</span>
                 <img @click="handleClick(item)" class="listIcon" src="./assets/svg/play.svg" alt="">
             </div>
         </div>
-        <div v-show="typeI === 1" class="three">
+        <div v-show="typeI === 2" class="three">
             <div>{{ loading ? '数据加载中...' : '' }}</div>
             <div>
                 <div v-for="(item, i) in wangyiList" :key="item.id ?? i" class="s-list">
@@ -47,7 +47,7 @@ const loading = ref(false)
 
 const current = ref<any>()
 const searchList = computed(() => {
-    if (typeI.value === 1) return []
+    if (typeI.value === 2) return []
     return list.value.map(o => {
         if (searchText.value && o.name.indexOf(searchText.value) === -1) {
             return null
@@ -58,7 +58,7 @@ const searchList = computed(() => {
 })
 
 const getList = async () => {
-    const { res } = await GET('/api/music/list')
+    const { res } = await GET(`/api/music/list?type=${typeI.value}`)
     if (res) {
         list.value = res.map(o => ({ ...o, url: baseURL + o.url }))
     }
@@ -67,6 +67,7 @@ const getList = async () => {
 const handleTypeClick = i => {
     searchText.value = ''
     typeI.value = i
+    getList()
 }
 
 const handlePlay = async ({ id, name }) => {
@@ -102,7 +103,7 @@ const handleClick = i => {
 
 const handleEnd = () => {
     const list = searchList.value
-    if (typeI.value === 1) return
+    if (typeI.value === 2) return
     let i = list.map(o => o?.name).indexOf(current.value?.name)
     if (i >= list.length || i === -1) {
         i = 0
@@ -157,9 +158,7 @@ onMounted(() => {
             padding: 2px 8px;
             border-radius: 5px;
             cursor: pointer;
-            &:first-child {
-                margin-right: 5px;
-            }
+            margin-right: 5px;
             &.act {
                 background: var(--theme-color);
                 color: #fff;

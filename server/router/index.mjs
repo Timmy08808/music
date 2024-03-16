@@ -11,7 +11,12 @@ router.get('/', async ctx => {
 })
 
 router.get('/api/music/list', async ctx => {
-    const names = readdirSync(resolve( 'public/music'))
+    const { type } = ctx.query
+    const dir = {
+        0: 'music',
+        1: 'tiktok'
+    }
+    const names = readdirSync(resolve(`public/${dir[type] ?? dir[0]}`))
     const data = names.filter(k => /\.mp3/.test(k)).map(name => ({ name: name.replace(/\.mp3/, ''), url: `/music/${name}` }))
     ctx.return({ data })
 })
