@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM13.7176 13.0314H13.3562L13.2281 12.9079C13.6764 12.3865 13.9463 11.7095 13.9463 10.9731C13.9463 9.33105 12.6152 8 10.9731 8C9.33105 8 8 9.33105 8 10.9731C8 12.6152 9.33105 13.9463 10.9731 13.9463C11.7095 13.9463 12.3865 13.6764 12.9079 13.2281L13.0314 13.3562V13.7176L15.3185 16L16 15.3185L13.7176 13.0314ZM10.9731 13.0315C9.8342 13.0315 8.91482 12.1121 8.91482 10.9731C8.91482 9.8342 9.8342 8.91482 10.9731 8.91482C12.1121 8.91482 13.0315 9.8342 13.0315 10.9731C13.0315 12.1121 12.1121 13.0315 10.9731 13.0315Z" fill="orange"/>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Tiny//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+]>
+<svg fill="#fff" version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	  width="400px" height="400px" viewBox="0 0 42 42" xml:space="preserve">
+<path d="M1,17.838c0,8.747,7.131,15.827,15.94,15.827c8.796,0,15.938-7.08,15.938-15.827S25.736,2,16.94,2C8.131,2,1,9.091,1,17.838
+	z M6.051,17.838c0-5.979,4.868-10.817,10.89-10.817c6.01,0,10.888,4.839,10.888,10.817c0,5.979-4.878,10.818-10.888,10.818
+	C10.919,28.656,6.051,23.816,6.051,17.838z M28.162,32.361l6.855,7.809c1.104,1.102,1.816,1.111,2.938,0l2.201-2.181
+	c1.082-1.081,1.149-1.778,0-2.921l-7.896-6.775L28.162,32.361z"/>
 </svg>

@@ -3,7 +3,9 @@
         <AudioCon v-bind="current" @onEnd="handleEnd" />
         <div class="search">
             <div class="s-con">
-                <img class="s-icon" @click="handleSearch" src="./assets/svg/search.svg" alt="">
+                <div class="s-icon-b">
+                    <img class="s-icon" @click="handleSearch" src="./assets/svg/search.svg" alt="">
+                </div>
                 <input v-model="searchText" class="s-input" placeholder="请输入歌名或歌手名" type="text">
             </div>
         </div>
@@ -121,16 +123,26 @@ onMounted(() => {
     margin: 0 auto;
     font-size: 14px;
     .search {
-        border: 1px solid orange;
+        border: 1px solid var(--theme-color);
         border-radius: 5px;
-        padding: 2px 2px 2px 10px;
+        padding: 4px 4px 4px 8px;
         .s-con {
             display: flex;
         }
-        .s-icon {
-            width: 32px;
+        .s-icon-b {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 26px;
+            height: 26px;
+            background-color: var(--theme-color);
             margin-right: 8px;
+            border-radius: 100%;
+        }
+        .s-icon {
+            width: 14px;
             cursor: pointer;
+            color: var(--theme-color);
         }
         .s-input {
             flex: 1;
@@ -141,7 +153,7 @@ onMounted(() => {
         span {
             display: inline-block;
             margin: 5px 0;
-            border: 1px solid orange;
+            border: 1px solid var(--theme-color);
             padding: 2px 8px;
             border-radius: 5px;
             cursor: pointer;
@@ -149,7 +161,7 @@ onMounted(() => {
                 margin-right: 5px;
             }
             &.act {
-                background: orange;
+                background: var(--theme-color);
                 color: #fff;
             }
         }
@@ -165,7 +177,7 @@ onMounted(() => {
             line-height: 24px;
             text-align: center;
             color: #fff;
-            background: orange;
+            background: var(--theme-color);
             display: inline-block;
             border-radius: 4px;
             cursor: pointer;
@@ -183,7 +195,7 @@ onMounted(() => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid orange;
+            border-bottom: 1px solid var(--theme-color);
             padding: 8px 12px;
         }
     }
@@ -193,16 +205,14 @@ onMounted(() => {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid orange;
-            border-radius: 5px;
-            margin: 10px 0;
-            padding: 5px 10px;
+            border-bottom: 1px solid var(--theme-color);
+            padding: 8px 10px;
             transition: all 0.5s;
             &:hover {
-                box-shadow: 0 0 10px orange;
+                box-shadow: 0 0 10px var(--theme-color);
             }
             &.isSelected {
-                background-color: rgba(255, 150, 50, .2);
+                background-color: var(--selected-color);
             }
             .name {
                 font-size: 14px;

@@ -106,8 +106,9 @@ watch(props, () => {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 94%;
     background-color: #fff;
+    padding: 0 3%;
 }
 .aucon {
     max-width: 750px;
@@ -116,10 +117,9 @@ watch(props, () => {
     justify-content: space-between;
     align-items: center;
     padding: 8px 10px;
-    border: 1px solid green;
     border-radius: 5px;
     transition: all 0.5s;
-    box-shadow: 0 0 10px green;
+    box-shadow: 0 0 10px var(--theme-color);
     .name {
         width: 40%;
         font-size: 14px;
@@ -142,7 +142,7 @@ watch(props, () => {
         position: absolute;
         height: 8px;
         border-radius: 8px;
-        background: linear-gradient(to bottom right, pink, orange);
+        background: linear-gradient(to bottom right, pink, var(--theme-color));
     }
     .time {
         font-size: 12px;
