@@ -22,7 +22,7 @@
             <div>{{ loading ? '数据加载中...' : '' }}</div>
             <div>
                 <div v-for="(item, i) in wangyiList" :key="item.id ?? i" class="s-list">
-                    <div>
+                    <div class="s-list-msg">
                         <div>歌名：{{ item.name }} ({{ timeFn(item.duration) }})</div>
                         <div>
                             <span>歌手：{{ item.artists.map(o => o.name).join('、') }}</span>
@@ -181,7 +181,6 @@ onMounted(() => {
             display: inline-block;
             border-radius: 4px;
             cursor: pointer;
-            margin: 4px 0;
             &.gray {
                 background: #ddd;
             }
@@ -197,6 +196,9 @@ onMounted(() => {
             align-items: center;
             border-bottom: 1px solid var(--theme-color);
             padding: 8px 12px;
+            .s-list-msg {
+                flex: 1;
+            }
         }
     }
     .list {
