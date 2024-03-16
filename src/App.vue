@@ -20,7 +20,7 @@
             </div>
         </div>
         <div v-show="typeI === 2" class="three">
-            <div>
+            <div v-if="wangyiList.length">
                 <div v-for="(item, i) in wangyiList" :key="item.id ?? i" class="s-list">
                     <div class="s-list-msg">
                         <div>歌名：{{ item.name }} ({{ timeFn(item.duration) }})</div>
@@ -31,6 +31,7 @@
                     <div class="play-btn" @click="handlePlay(item)">{{ item.fee === 1 ? '试听' : '播放' }}</div>
                 </div>
             </div>
+            <div v-else>请在上面输入框内输入歌名或歌手名进行搜索</div>
         </div>
     </div>
 </template>
