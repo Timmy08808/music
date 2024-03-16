@@ -16,7 +16,7 @@ router.get('/api/music/list', async ctx => {
         0: 'music',
         1: 'tiktok'
     }
-    const dir = dir[type] ?? dir[0]
+    const dir = dirs[type] ?? dirs[0]
     const names = readdirSync(resolve(`public/${dir}`))
     const data = names.filter(k => /\.mp3/.test(k)).map(name => ({ name: name.replace(/\.mp3/, ''), url: `/${dir}/${name}` }))
     ctx.return({ data })
